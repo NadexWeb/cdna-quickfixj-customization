@@ -601,7 +601,7 @@
             </group>
         </component>
         <component name="PosUndInstrmtGrp">
-            <group name="NoUnderlying" required="N">
+            <group name="NoUnderlyings" required="N">
                 <field name="UnderlyingSettlPrice" required="N"/>
                 <field name="UnderlyingSettlPriceType" required="N"/>
             </group>
@@ -650,7 +650,7 @@
             </group>
         </component>
         <component name="UnderlyingInstrumentBlock">
-            <group name="NoUnderlying" required="Y">
+            <group name="NoUnderlyings" required="Y">
                 <field name="UnderlyingSymbol" required="Y"/>
                 <field name="UnderlyingMaturityMonthYear" required="Y"/>
                 <group name="NoUnderlyingSecurityAltID" required="Y">
@@ -686,7 +686,7 @@
             </group>
         </component>
         <component name="SecurityStatusUnderlyingGrp">
-            <group name="NoUnderlying" required="N">
+            <group name="NoUnderlyings" required="N">
                 <field name="UnderlyingSymbol" required="Y"/>
                 <group name="NoUnderlyingSecurityAltID" required="Y">
                     <field name="UnderlyingSecurityAltID" required="Y"/>
@@ -1564,7 +1564,7 @@
         <field number="541" name="MaturityDate" type="LOCALMKTDATE"/>
         <field number="313" name="UnderlyingMaturityMonthYear" type="MONTHYEAR"/>
         <field number="561" name="RoundLot" type="QTY"/>
-        <field number="711" name="NoUnderlying" type="NUMINGROUP"/>
+        <field number="711" name="NoUnderlyings" type="NUMINGROUP"/>
         <field number="729" name="PosReqStatus" type="INT">
             <value enum="0" description="COMPLETED"/>
             <value enum="2" description="REJECTED"/>
