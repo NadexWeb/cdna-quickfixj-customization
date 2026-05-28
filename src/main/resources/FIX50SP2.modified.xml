@@ -1389,8 +1389,14 @@
             <value enum="2" description="DISABLE_PREVIOUS_SNAPSHOT_UPDATE_REQUEST"/>
         </field>
         <field number="264" name="MarketDepth" type="INT"/>
-        <field number="265" name="MDUpdateType" type="INT"/>
-        <field number="266" name="AggregatedBook" type="BOOLEAN"/>
+        <field number="265" name="MDUpdateType" type="INT">
+            <value enum="0" description="FULL_REFRESH"/>
+            <value enum="1" description="INCREMENTAL_REFRESH"/>
+        </field>
+        <field number="266" name="AggregatedBook" type="BOOLEAN">
+            <value enum="Y" description="BOOK_ENTRIES_TO_BE_AGGREGATED"/>
+            <value enum="N" description="BOOK_ENTRIES_SHOULD_NOT_BE_AGGREGATED"/>
+        </field>
         <field number="547" name="MDImplicitDelete" type="BOOLEAN"/>
         <field number="267" name="NoMDEntryTypes" type="INT"/>
         <field number="269" name="MDEntryType" type="CHAR">
