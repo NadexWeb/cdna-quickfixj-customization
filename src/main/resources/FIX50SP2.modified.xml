@@ -365,9 +365,7 @@
         <message name="MarketDataIncrementalRefresh" msgtype="X" msgcat="app">
             <field name="MDReqID" required="N"/> <!-- Setting to Not Required to allow encoding in the gateway -->
             <field name="Symbol" required="N"/> <!-- Initially conditional - will become required once deprecated entry symbol is removed -->
-            <group name="NoMDEntries" required="N">
-                <component name="DcmMDEntries" required="Y"/>
-            </group>
+            <component name="MDIncGrp" required="N"/>
             <!-- Internal testing env fields -->
             <field name="BookSeqNum" required="N"/>
             <field name="PrevBookSeqNum" required="N"/>
@@ -376,9 +374,7 @@
         <message name ="MarketDataSnapshotFullRefresh" msgtype="W" msgcat="app">
             <field name="MDReqID" required="N"/> <!-- Setting to Not Required to allow encoding in the gateway -->
             <field name="Symbol" required="Y"/>
-            <group name="NoMDEntries" required="Y">
-                <component name="DcmMDEntries" required="Y"/>
-            </group>
+            <component name="MDFullGrp" required="Y"/>
             <!-- Internal testing env fields -->
             <field name="BookSeqNum" required="N"/>
             <field name="BookTimestamp" required="N"/>
@@ -663,21 +659,40 @@
                 </group>
             </group>
         </component>
-        <component name="DcmMDEntries">
-            <field name="MDUpdateAction" required="N"/>
-            <field name="MDEntryType" required="Y"/>
-            <field name="Symbol" required="N"/> <!-- Deprecated in Delta updates but not in Snapshots updates -->
-            <field name="MDEntryID" required="N"/>
-            <field name="MDEntryPx" required="Y"/>
-            <field name="MDEntrySize" required="N"/> <!-- Conditionally required: when MDEntryType=0,1,2 -->
-            <field name="MDEntryDate" required="N"/>
-            <field name="MDEntryTime" required="N"/>
-            <field name="HighPx" required="N"/> <!-- Conditionally required: when MDEntryType=2 (Trade) -->
-            <field name="LowPx" required="N"/> <!-- Conditionally required: when MDEntryType=2 (Trade) -->
-            <field name="TradeVolume" required="N"/> <!-- Conditionally required: when MDEntryType=2 (Trade) -->
-            <field name="QuoteEntryID" required="N"/>
-            <field name="AggressorSide" required="N"/> <!-- Required when Market Maker subscribed for trade updates -->
-            <field name="MDEntrySpotRate" required="N"/>
+        <component name="MDIncGrp">
+            <group name="NoMDEntries" required="Y">
+                <field name="MDUpdateAction" required="Y"/>
+                <field name="MDEntryType" required="Y"/>
+                <field name="Symbol" required="N"/> <!-- Deprecated in Delta updates but not in Snapshots updates -->
+                <field name="MDEntryID" required="N"/>
+                <field name="MDEntryPx" required="Y"/>
+                <field name="MDEntrySize" required="N"/> <!-- Conditionally required: when MDEntryType=0,1,2 -->
+                <field name="MDEntryDate" required="N"/>
+                <field name="MDEntryTime" required="N"/>
+                <field name="HighPx" required="N"/> <!-- Conditionally required: when MDEntryType=2 (Trade) -->
+                <field name="LowPx" required="N"/> <!-- Conditionally required: when MDEntryType=2 (Trade) -->
+                <field name="TradeVolume" required="N"/> <!-- Conditionally required: when MDEntryType=2 (Trade) -->
+                <field name="QuoteEntryID" required="N"/>
+                <field name="AggressorSide" required="N"/> <!-- Required when Market Maker subscribed for trade updates -->
+                <field name="MDEntrySpotRate" required="N"/>
+            </group>
+        </component>
+        <component name="MDFullGrp">
+            <group name="NoMDEntries" required="Y">
+                <field name="MDEntryType" required="Y"/>
+                <field name="Symbol" required="N"/> <!-- Deprecated in Delta updates but not in Snapshots updates -->
+                <field name="MDEntryID" required="N"/>
+                <field name="MDEntryPx" required="Y"/>
+                <field name="MDEntrySize" required="N"/> <!-- Conditionally required: when MDEntryType=0,1,2 -->
+                <field name="MDEntryDate" required="N"/>
+                <field name="MDEntryTime" required="N"/>
+                <field name="HighPx" required="N"/> <!-- Conditionally required: when MDEntryType=2 (Trade) -->
+                <field name="LowPx" required="N"/> <!-- Conditionally required: when MDEntryType=2 (Trade) -->
+                <field name="TradeVolume" required="N"/> <!-- Conditionally required: when MDEntryType=2 (Trade) -->
+                <field name="QuoteEntryID" required="N"/>
+                <field name="AggressorSide" required="N"/> <!-- Required when Market Maker subscribed for trade updates -->
+                <field name="MDEntrySpotRate" required="N"/>
+            </group>
         </component>
         <component name="SecurityStatusInstrAttribGrp">
             <group name="NoInstrAttrib" required="N">
@@ -1399,6 +1414,7 @@
         </field>
         <field number="547" name="MDImplicitDelete" type="BOOLEAN"/>
         <field number="267" name="NoMDEntryTypes" type="INT"/>
+        <field number="268" name="NoMDEntries" type="NUMINGROUP"/>
         <field number="269" name="MDEntryType" type="CHAR">
             <value enum="0" description="BID"/>
             <value enum="1" description="OFFER"/>
@@ -1409,7 +1425,6 @@
             <value enum="H" description="LAST_MID_PRICE"/>
             <value enum="J" description="EMPTY_BOOK"/>
         </field>
-        <field number="268" name="NoMDEntries" type="INT"/>
         <field number="279" name="MDUpdateAction" type="CHAR">
             <value enum="0" description="NEW"/>
             <value enum="1" description="UPDATE"/>
